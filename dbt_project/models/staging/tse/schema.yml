@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: stg_votacao_secao
+    description: >
+      Dados eleitorais do TSE 2022 para o Espírito Santo,
+      tratados e padronizados para análise.
+
+    columns:
+      - name: dt_geracao
+        description: Data de geração do arquivo pelo TSE.
+        data_tests:
+          - not_null
+
+      - name: ano_eleicao
+        description: Ano de referência da eleição.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [2022]
+
+      - name: sg_uf
+        description: Unidade da Federação.
+        data_tests:
+          - not_null
+
+      - name: nm_municipio
+        description: Nome do município.
+        data_tests:
+          - not_null
+
+      - name: ds_cargo
+        description: Cargo disputado na eleição.
+        data_tests:
+          - not_null
+
+      - name: qt_votos
+        description: Quantidade de votos registrada.
+        data_tests:
+          - not_null
