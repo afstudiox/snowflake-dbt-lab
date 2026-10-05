@@ -1,0 +1,26 @@
+# Ambientes Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Dados brutos e arquivos grandes
+**/data_raw/
+*.csv
+*.zip
+*.parquet
+*.duckdb
+
+# dbt
+**/target/
+**/logs/
+
+# Variáveis e credenciais
+.env
+.env.*
+!.env.example
+
+# Sistema e editores
+.DS_Store
+.vscode/
+.idea/
