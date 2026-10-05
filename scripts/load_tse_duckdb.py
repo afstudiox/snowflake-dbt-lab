@@ -18,48 +18,49 @@ DATABASE_PATH = (
     / "dev.duckdb"
 )
 
+
 if not CSV_PATH.exists():
     raise FileNotFoundError(
         f"Arquivo CSV não encontrado: {CSV_PATH}"
     )
 
+
 print(f"CSV encontrado: {CSV_PATH}")
 print(f"Banco DuckDB: {DATABASE_PATH}")
 
+
 with duckdb.connect(str(DATABASE_PATH)) as connection:
+    print("Conexão com DuckDB estabelecida.")
 
-    with duckdb.connect(str(DATABASE_PATH)) as connection:
-        print("Conexão com DuckDB estabelecida.")
-
-        connection.execute(
-            """
-            CREATE OR REPLACE TABLE raw_votacao_secao AS
-            SELECT *
-            FROM read_csv(
-                ?,
-                delim=';',
-                quote='"',
-                header=true,
-                encoding='latin-1',
-                all_varchar=true
-            )
-            """,
-            [str(CSV_PATH)],
+    connection.execute(
+        """
+        CREATE OR REPLACE TABLE raw_votacao_secao AS
+        SELECT *
+        FROM read_csv(
+            ?,
+            delim=';',
+            quote='"',
+            header=true,
+            encoding='latin-1',
+            all_varchar=true
         )
+        """,
+        [str(CSV_PATH)],
+    )
 
-        row_count = connection.execute(
-            "SELECT COUNT(*) FROM raw_votacao_secao"
-        ).fetchone()[0]
+    row_count = connection.execute(
+        "SELECT COUNT(*) FROM raw_votacao_secao"
+    ).fetchone()[0]
 
-        print(f"Linhas carregadas: {row_count}")
+    print(f"Linhas carregadas: {row_count}")
 
-        columns = connection.execute(
-            "DESCRIBE raw_votacao_secao"
-        ).fetchall()
+    columns = connection.execute(
+        "DESCRIBE raw_votacao_secao"
+    ).fetchall()
 
-        print("Colunas da tabela:")
-        for column in columns:
-            print(f"- {column[0]}: {column[1]}")
+    print("Colunas da tabela:")
 
+    for column in columns:
+        print(f"- {column[0]}: {column[1]}")
 
     print("Tabela raw_votacao_secao criada.")
