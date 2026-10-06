@@ -33,3 +33,8 @@ models:
   dbt_project:
     staging:
       +materialized: view
+      +schema: STAGING
+
+    marts:
+      +materialized: view
+      +schema: MARTS

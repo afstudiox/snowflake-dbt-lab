@@ -6,10 +6,7 @@ with source_data as (
 )
 
 select
-    try_strptime(
-        nullif(DT_GERACAO, '#NULO'),
-        '%d/%m/%Y'
-    )::date as dt_geracao,
+    {{ parse_tse_date('DT_GERACAO') }} as dt_geracao,
 
     nullif(HH_GERACAO, '#NULO') as hh_geracao,
 
@@ -25,10 +22,7 @@ select
         as integer
     ) as nr_turno,
 
-    try_strptime(
-        nullif(DT_ELEICAO, '#NULO'),
-        '%d/%m/%Y'
-    )::date as dt_eleicao,
+    {{ parse_tse_date('DT_ELEICAO') }} as dt_eleicao,
 
     nullif(SG_UF, '#NULO') as sg_uf,
 

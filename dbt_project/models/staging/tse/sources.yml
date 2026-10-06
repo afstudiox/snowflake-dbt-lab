@@ -2,6 +2,7 @@ version: 2
 
 sources:
   - name: tse_raw
-    schema: main
+    database: "{{ target.database }}"
+    schema: "{{ target.schema }}"
     tables:
       - name: raw_votacao_secao
