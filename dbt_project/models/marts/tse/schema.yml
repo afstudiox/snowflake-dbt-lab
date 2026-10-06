@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: mart_votos_por_municipio
+    description: >
+      Total de votos por município, cargo e unidade federativa
+      nas eleições do TSE de 2022 no Espírito Santo.
+
+    columns:
+      - name: sg_uf
+        description: Sigla da Unidade da Federação.
+        data_tests:
+          - not_null
+
+      - name: cd_municipio
+        description: Código oficial do município.
+        data_tests:
+          - not_null
+
+      - name: nm_municipio
+        description: Nome do município.
+        data_tests:
+          - not_null
+
+      - name: ds_cargo
+        description: Cargo eleitoral.
+        data_tests:
+          - not_null
+
+      - name: total_votos
+        description: Soma dos votos registrados no agrupamento.
+        data_tests:
+          - not_null
